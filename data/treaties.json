@@ -1,0 +1,164 @@
+[
+  {
+    "id": "npt",
+    "name": "Nuclear Non-Proliferation Treaty (NPT)",
+    "full_name": "Treaty on the Non-Proliferation of Nuclear Weapons",
+    "signed": 1968,
+    "entered_into_force": 1970,
+    "status": "In force",
+    "parties": 191,
+    "non_parties": ["India", "Israel", "Pakistan", "South Sudan"],
+    "withdrawn": ["North Korea (2003)"],
+    "depositary": ["United States", "United Kingdom", "Russia"],
+    "summary": "Cornerstone of global nuclear non-proliferation architecture. Three pillars: (1) non-proliferation — non-nuclear states agree not to acquire nuclear weapons; (2) disarmament — nuclear states commit to pursue disarmament; (3) peaceful use — all parties may access civilian nuclear technology. Review conferences held every 5 years. Heavily criticized for asymmetric obligations between nuclear and non-nuclear states.",
+    "key_articles": {
+      "Article I": "Nuclear-weapon states not to transfer nuclear weapons or assist others to acquire them.",
+      "Article II": "Non-nuclear states not to receive or manufacture nuclear weapons.",
+      "Article VI": "All parties to pursue good-faith negotiations on nuclear disarmament.",
+      "Article X": "Right to withdraw with 90 days notice if supreme interests jeopardized."
+    },
+    "current_challenges": [
+      "North Korea withdrawal and ongoing nuclear program",
+      "Iran nuclear program ambiguity",
+      "Slow progress on Article VI disarmament obligations",
+      "India-Pakistan-Israel remaining outside the treaty",
+      "AUKUS nuclear submarine technology transfer debate"
+    ],
+    "category": "Nuclear Non-Proliferation",
+    "source": "United Nations Office for Disarmament Affairs (UNODA)"
+  },
+  {
+    "id": "inf",
+    "name": "Intermediate-Range Nuclear Forces Treaty (INF)",
+    "full_name": "Treaty Between the United States of America and the Union of Soviet Socialist Republics on the Elimination of Their Intermediate-Range and Shorter-Range Missiles",
+    "signed": 1987,
+    "entered_into_force": 1988,
+    "terminated": 2019,
+    "status": "Terminated",
+    "parties_original": ["United States", "Soviet Union (succeeded by Russia)"],
+    "summary": "Bilateral US-Soviet agreement eliminating all land-based ballistic and cruise missiles with ranges of 500–5,500 km. Over 2,692 missiles destroyed. Landmark achievement of Cold War arms control. The US withdrew in August 2019, citing Russian violations (SSC-8 / 9M729 cruise missile). Russia suspended and then withdrew in response.",
+    "missiles_eliminated": 2692,
+    "range_covered_km": "500–5,500",
+    "timeline": {
+      "1987": "Signed by Reagan and Gorbachev",
+      "1988": "Entered into force",
+      "1991": "All missiles eliminated",
+      "2018": "US formally accuses Russia of SSC-8 violation",
+      "Feb 2019": "US suspends treaty obligations",
+      "Aug 2, 2019": "US formally withdraws; treaty terminated"
+    },
+    "strategic_impact": "Post-INF, both US and Russia are developing ground-launched missiles in the 500–5,500 km range class. China (never a party) fields extensive MRBM/IRBM arsenal. This creates asymmetric pressure on US Indo-Pacific strategy.",
+    "category": "Bilateral Arms Control",
+    "source": "US Department of State Arms Control Bureau"
+  },
+  {
+    "id": "new_start",
+    "name": "New START",
+    "full_name": "Treaty Between the United States of America and the Russian Federation on Measures for the Further Reduction and Limitation of Strategic Offensive Arms",
+    "signed": 2010,
+    "entered_into_force": 2011,
+    "expired_extended_to": 2026,
+    "status": "Suspended by Russia (Feb 2023)",
+    "parties": ["United States", "Russia"],
+    "limits": {
+      "deployed_strategic_warheads": 1550,
+      "deployed_delivery_vehicles": 700,
+      "deployed_and_non_deployed_delivery_vehicles": 800
+    },
+    "summary": "Caps US and Russian deployed strategic nuclear warheads at 1,550 each and limits delivery vehicles. Includes verification regime with on-site inspections and data exchanges. Extended by Biden-Putin in February 2021 for 5 years. Russia suspended participation February 2023 citing inability to verify US compliance and response to Western support for Ukraine.",
+    "current_status_2025": "Russia suspended participation February 2023. No inspections since. Treaty nominally expires February 5, 2026. Negotiations for successor treaty stalled.",
+    "verification_mechanism": "On-site inspections (limited to 18/year each), data exchanges, notifications of missile movements and tests.",
+    "category": "Strategic Nuclear Arms Control",
+    "source": "US Department of State; Arms Control Association"
+  },
+  {
+    "id": "mtcr",
+    "name": "Missile Technology Control Regime (MTCR)",
+    "full_name": "Missile Technology Control Regime",
+    "established": 1987,
+    "status": "Active (voluntary regime, not treaty)",
+    "members": 35,
+    "summary": "Voluntary, informal political arrangement among 35 countries to restrict export of missiles and missile-related technologies capable of delivering weapons of mass destruction. Not legally binding. Focuses on preventing transfer of systems capable of carrying payloads over 500 kg to ranges over 300 km.",
+    "thresholds": {
+      "category_1": "Systems capable of carrying ≥500 kg payload to ≥300 km range — presumption of denial; very strong controls",
+      "category_2": "Other missiles, subsystems, components, materials — case-by-case evaluation"
+    },
+    "key_items_controlled": [
+      "Complete rocket systems and unmanned air vehicles",
+      "Propulsion systems (solid and liquid motors)",
+      "Guidance and control systems",
+      "Reentry vehicles",
+      "Propellants and propellant production facilities",
+      "Structural materials (carbon fiber, maraging steel)"
+    ],
+    "limitations": [
+      "Voluntary — no enforcement mechanism",
+      "Non-members (China, Iran, North Korea) not bound",
+      "Members may transfer to each other",
+      "Dual-use technology difficult to control",
+      "Commercial space launch technology overlap"
+    ],
+    "category": "Export Control Regime",
+    "source": "MTCR Secretariat; Arms Control Association"
+  },
+  {
+    "id": "start_i",
+    "name": "START I",
+    "full_name": "Strategic Arms Reduction Treaty",
+    "signed": 1991,
+    "entered_into_force": 1994,
+    "expired": 2009,
+    "status": "Expired",
+    "parties": ["United States", "Russia (USSR successor)", "Ukraine", "Belarus", "Kazakhstan"],
+    "summary": "First treaty requiring US and Soviet Union (later Russia) to reduce strategic nuclear weapons. Limited deployed strategic nuclear warheads to 6,000 and delivery vehicles to 1,600. Included intrusive verification regime. Expired December 2009.",
+    "warheads_reduced": "~80% of Soviet strategic warheads under treaty framework",
+    "category": "Strategic Nuclear Arms Control",
+    "source": "US Department of State"
+  },
+  {
+    "id": "cwc",
+    "name": "Chemical Weapons Convention (CWC)",
+    "full_name": "Convention on the Prohibition of the Development, Production, Stockpiling and Use of Chemical Weapons and on their Destruction",
+    "signed": 1993,
+    "entered_into_force": 1997,
+    "status": "In force",
+    "parties": 193,
+    "non_parties": ["Egypt", "South Sudan"],
+    "implementing_body": "Organisation for the Prohibition of Chemical Weapons (OPCW)",
+    "summary": "Prohibits development, production, acquisition, stockpiling, retention, transfer, and use of chemical weapons. Relevance to missile platform: chemical warheads on ballistic or cruise missiles are prohibited under CWC. OPCW conducts verification through inspections and chemical samples. Syria's use of chemical weapons (Sarin, Chlorine) against civilians triggered OPCW investigations.",
+    "verification": "Routine and challenge inspections; chemical sampling; declarations of stockpiles and facilities.",
+    "category": "WMD Non-Proliferation",
+    "source": "OPCW; UN Disarmament"
+  },
+  {
+    "id": "hague_code",
+    "name": "Hague Code of Conduct (HCoC)",
+    "full_name": "International Code of Conduct against Ballistic Missile Proliferation",
+    "established": 2002,
+    "status": "Active (voluntary)",
+    "subscribing_states": 143,
+    "notable_non_subscribers": ["China", "Iran", "Pakistan", "North Korea", "Syria"],
+    "summary": "Voluntary, politically binding commitment to transparency in ballistic missile programs. Subscribers commit to: pre-launch notification of ballistic missile and space launch vehicle tests; annual declarations of policies and programs; general restraint. Does not prohibit missile development — only requires transparency.",
+    "obligations": [
+      "Pre-launch notification of ballistic missile and SLV launches",
+      "Annual declarations on missile programs",
+      "Restraint in development, testing, deployment",
+      "Subscribe to ban on WMD-capable missiles"
+    ],
+    "category": "Transparency Measure",
+    "source": "HCoC Secretariat, Vienna; Arms Control Association"
+  },
+  {
+    "id": "aukus",
+    "name": "AUKUS Partnership",
+    "full_name": "Australia–United Kingdom–United States Trilateral Security Partnership",
+    "established": 2021,
+    "status": "Active",
+    "parties": ["Australia", "United Kingdom", "United States"],
+    "summary": "Trilateral security partnership announced September 2021. Pillar I: Australia to acquire nuclear-powered submarines (SSN-AUKUS) using US and UK technology. Pillar II: advanced capabilities sharing including hypersonic missiles, AI, electronic warfare, cyber, quantum. Controversial under NPT: nuclear material transfer to non-nuclear state raises safeguards questions. IAEA and NPT implications debated.",
+    "missile_relevance": "Pillar II includes joint development of Hypersonic Attack Cruise Missile (HACM), Southern Cross Integrated Flight Research Experiment (SCIFiRE), and integration of SM-6/Tomahawk on Australian vessels.",
+    "npt_debate": "Transfer of nuclear submarine technology to Australia (non-nuclear state) is unprecedented. Australia, US, UK argue submarines use reactors (not weapons) — NPT Article IV permits peaceful nuclear use. Critics argue the precedent undermines non-proliferation norms.",
+    "category": "Alliance / Capability Sharing",
+    "source": "White House Fact Sheet; IISS; Arms Control Association 2023"
+  }
+]

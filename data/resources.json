@@ -1,0 +1,174 @@
+[
+  {
+    "id": "csis_mda",
+    "title": "CSIS Missile Defense Project — Missiles of the World",
+    "type": "Reference Database",
+    "organization": "Center for Strategic and International Studies (CSIS)",
+    "url": "https://missilethreat.csis.org/missile/",
+    "description": "Comprehensive open-source database of ballistic missiles, cruise missiles, and related systems worldwide. Includes technical specifications, deployment status, and program histories. Updated regularly by CSIS defense analysts.",
+    "topics": ["Missile specifications", "Ballistic missiles", "Cruise missiles", "Missile defense"],
+    "access": "Free"
+  },
+  {
+    "id": "iiss_military_balance",
+    "title": "IISS Military Balance",
+    "type": "Annual Reference",
+    "organization": "International Institute for Strategic Studies (IISS)",
+    "url": "https://www.iiss.org/publications/the-military-balance/",
+    "description": "Annual publication providing comprehensive data on global military capabilities including missile forces, defense spending, and order of battle. The authoritative reference for comparing military capabilities across nations.",
+    "topics": ["Military capabilities", "Missile forces", "Defense spending", "Order of battle"],
+    "access": "Subscription (libraries often provide free access)"
+  },
+  {
+    "id": "arms_control_assoc",
+    "title": "Arms Control Association — Fact Sheets & Briefing Books",
+    "type": "Policy Reference",
+    "organization": "Arms Control Association",
+    "url": "https://www.armscontrol.org/factsheets",
+    "description": "Authoritative fact sheets on arms control treaties, missile programs, nuclear arsenals, and nonproliferation developments. Regularly updated. Includes treaty texts and analysis.",
+    "topics": ["Arms control", "Treaties", "Nuclear weapons", "Nonproliferation", "Verification"],
+    "access": "Free"
+  },
+  {
+    "id": "nti_database",
+    "title": "NTI Nuclear Security Index & Country Profiles",
+    "type": "Reference Database",
+    "organization": "Nuclear Threat Initiative (NTI)",
+    "url": "https://www.nti.org/countries/",
+    "description": "Country-by-country profiles of nuclear, chemical, and biological weapons programs. Includes missile delivery system assessments, treaty compliance, and proliferation risk analysis.",
+    "topics": ["Nuclear security", "Country profiles", "Proliferation", "Missile programs"],
+    "access": "Free"
+  },
+  {
+    "id": "dod_china_report",
+    "title": "DoD Annual Report to Congress: China's Military Power",
+    "type": "Official Government Report",
+    "organization": "US Department of Defense",
+    "url": "https://www.defense.gov/News/Releases/",
+    "description": "Annual unclassified report to Congress on Chinese military developments including missile forces, modernization, doctrine, and strategic intentions. Primary US government open-source assessment of PLA missile capabilities.",
+    "topics": ["China", "DF-series missiles", "PLA Rocket Force", "Hypersonic", "Anti-ship missiles"],
+    "access": "Free (declassified)"
+  },
+  {
+    "id": "sipri_yearbook",
+    "title": "SIPRI Yearbook: Armaments, Disarmament and International Security",
+    "type": "Annual Reference",
+    "organization": "Stockholm International Peace Research Institute (SIPRI)",
+    "url": "https://www.sipri.org/yearbook",
+    "description": "Annual reference work on armaments trends, military expenditure, arms transfers, arms control and disarmament. Nuclear arsenals chapter provides best unclassified estimates of global warhead inventories.",
+    "topics": ["Arms transfers", "Military expenditure", "Nuclear arsenals", "Arms control"],
+    "access": "Subscription (summaries free)"
+  },
+  {
+    "id": "rand_missile_defense",
+    "title": "RAND Reports on Missile Defense and Proliferation",
+    "type": "Research Reports",
+    "organization": "RAND Corporation",
+    "url": "https://www.rand.org/topics/missile-defense.html",
+    "description": "Policy-relevant research on missile defense effectiveness, proliferation risks, and strategic implications. Includes quantitative analyses of intercept probabilities and saturation scenarios.",
+    "topics": ["Missile defense", "Proliferation", "Deterrence", "Intercept probability"],
+    "access": "Free (most reports)"
+  },
+  {
+    "id": "federation_of_american_scientists",
+    "title": "Federation of American Scientists — Nuclear Information Project",
+    "type": "Research Database",
+    "organization": "Federation of American Scientists (FAS)",
+    "url": "https://fas.org/issues/nuclear-weapons/",
+    "description": "Technical analysis of nuclear weapons programs, delivery systems, and arsenals. FAS was one of the first organizations to declassify and publicize nuclear weapons information using open-source methods.",
+    "topics": ["Nuclear weapons", "Delivery systems", "ICBMs", "SLBMs", "Bombers"],
+    "access": "Free"
+  },
+  {
+    "id": "cia_world_factbook",
+    "title": "CIA World Factbook — Military Section",
+    "type": "Reference",
+    "organization": "Central Intelligence Agency",
+    "url": "https://www.cia.gov/the-world-factbook/",
+    "description": "Unclassified summary of country military capabilities including armed forces branches, equipment, and defense spending. Useful for baseline country comparisons.",
+    "topics": ["Country military profiles", "Defense spending", "Armed forces"],
+    "access": "Free"
+  },
+  {
+    "id": "janes_defence",
+    "title": "Janes Defence Intelligence",
+    "type": "Professional Reference Database",
+    "organization": "Janes Information Group",
+    "url": "https://www.janes.com/",
+    "description": "Most comprehensive professional open-source defense intelligence database. Covers weapons systems, platforms, country threat assessments, and order of battle. Standard reference for defense professionals, analysts, and researchers.",
+    "topics": ["All weapons systems", "Military platforms", "Country assessments", "Specifications"],
+    "access": "Subscription (expensive; available via many research libraries)"
+  },
+  {
+    "id": "38north",
+    "title": "38 North — North Korea Analysis",
+    "type": "Research Publication",
+    "organization": "Stimson Center",
+    "url": "https://www.38north.org/",
+    "description": "Specialized analysis of North Korean missile programs, nuclear activities, and security developments. Uses commercial satellite imagery and open-source intelligence. Essential reference for DPRK missile tracking.",
+    "topics": ["North Korea", "ICBM", "Hwasong", "Nuclear", "Satellite imagery analysis"],
+    "access": "Free"
+  },
+  {
+    "id": "arms_control_wonk",
+    "title": "Arms Control Wonk",
+    "type": "Academic Blog / Podcast",
+    "organization": "James Martin Center for Nonproliferation Studies",
+    "url": "https://www.armscontrolwonk.com/",
+    "description": "Leading academic blog and podcast covering arms control, nonproliferation, and missile defense from expert practitioners and scholars. Frequently features analysis of new missile tests and proliferation developments.",
+    "topics": ["Arms control", "Nonproliferation", "Missile tests", "Nuclear policy"],
+    "access": "Free"
+  },
+  {
+    "id": "sutton_biblarz",
+    "title": "Rocket Propulsion Elements (9th Edition)",
+    "type": "Textbook",
+    "authors": ["George P. Sutton", "Oscar Biblarz"],
+    "publisher": "Wiley",
+    "year": 2017,
+    "description": "The definitive textbook on rocket propulsion. Covers solid, liquid, and hybrid motors; nozzle design; performance calculations; staging; and propellants. Essential for understanding Isp, thrust curves, and propulsion system design.",
+    "topics": ["Rocket propulsion", "Solid motors", "Liquid engines", "Specific impulse", "Nozzle design"],
+    "access": "Purchase required (~$100)"
+  },
+  {
+    "id": "wertz_space_mission",
+    "title": "Space Mission Engineering: The New SMAD",
+    "type": "Textbook",
+    "authors": ["James R. Wertz", "David F. Everett", "Jeffery J. Puschell"],
+    "publisher": "Microcosm Press",
+    "year": 2011,
+    "description": "Comprehensive reference on space and missile systems engineering. Relevant chapters: launch vehicle design, trajectory optimization, reentry analysis, mission planning. Standard text for aerospace engineering programs.",
+    "topics": ["Trajectory analysis", "Launch vehicles", "Reentry", "Mission planning", "Systems engineering"],
+    "access": "Purchase required"
+  },
+  {
+    "id": "tewari_atmospheric",
+    "title": "Atmospheric and Space Flight Dynamics",
+    "type": "Textbook",
+    "authors": ["Ashish Tewari"],
+    "publisher": "Birkhauser",
+    "year": 2007,
+    "description": "Rigorous treatment of flight dynamics for atmospheric and space vehicles including ballistic missiles. Covers equations of motion, atmospheric models, guidance theory, and reentry dynamics.",
+    "topics": ["Flight dynamics", "Atmospheric models", "Guidance", "Ballistic trajectories", "Reentry"],
+    "access": "Purchase / library"
+  },
+  {
+    "id": "opall_rome_iron_dome",
+    "title": "Iron Dome: Israel's Air Defense System",
+    "type": "Monograph",
+    "authors": ["Barbara Opall-Rome"],
+    "description": "Detailed account of Iron Dome development, operational use, and effectiveness. Based on interviews with Israeli defense officials. Covers engineering decisions, budget battles, and lessons from operational use.",
+    "topics": ["Iron Dome", "Missile defense", "Israel", "Air defense", "Intercept technology"],
+    "access": "Library / purchase"
+  },
+  {
+    "id": "nonproliferation_review",
+    "title": "The Nonproliferation Review",
+    "type": "Academic Journal",
+    "organization": "James Martin Center for Nonproliferation Studies",
+    "url": "https://www.tandfonline.com/toc/rnpr20/current",
+    "description": "Peer-reviewed journal covering all aspects of nuclear, chemical, biological, and missile nonproliferation. Articles on technology, policy, history, and case studies. Indexed in major academic databases.",
+    "topics": ["Nonproliferation", "Arms control", "WMD", "Missile technology"],
+    "access": "Subscription (Tandfonline); many articles available free after embargo"
+  }
+]

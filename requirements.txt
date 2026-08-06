@@ -1,0 +1,47 @@
+# ============================================================
+# Missile Analysis & Research Platform v2 — Requirements
+# ============================================================
+# Core application
+streamlit==1.45.0
+plotly==6.0.1
+pandas==2.2.3
+numpy==2.0.2
+scipy==1.14.1
+
+# Async task queue (Celery + Redis broker)
+celery==5.4.0
+redis==5.2.1
+kombu==5.3.7
+
+# Caching
+cachetools==5.5.2
+hiredis==3.1.1
+
+# Database
+sqlalchemy==2.0.38
+psycopg2-binary==2.9.10
+alembic==1.14.1
+
+# HTTP / API layer
+fastapi==0.115.12
+uvicorn[standard]==0.34.0
+httpx==0.28.1
+
+# Security
+python-multipart==0.0.9
+
+# Utilities
+python-dotenv==1.0.1
+tenacity==9.0.0
+requests==2.32.3
+
+# Optional integrations
+stripe==10.12.0
+posthog==3.7.0
+reportlab==4.2.5
+sentry-sdk==2.19.2
+
+# Testing
+pytest==8.3.4
+pytest-cov==6.0.0
+pytest-asyncio==0.24.0
