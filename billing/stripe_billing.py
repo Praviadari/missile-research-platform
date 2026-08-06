@@ -155,7 +155,6 @@ def render_upgrade_cta(compact: bool = False) -> None:
             ("🔥 Propulsion Analysis",    "Isp curves, multi-stage optimisation, mass fraction explorer"),
             ("⚡ Hypersonic Lab",          "HGV, scramjet, and thermal management reference tools"),
             ("🛡️ Defense Systems Lab",    "Layered defense engagement envelopes, intercept geometry"),
-            ("💥 Saturation Modeler",     "Monte Carlo saturation analysis — historical & custom scenarios"),
             ("🛠️ Design Lab",            "7-step guided missile design research wizard"),
             ("🌐 3D Visualizer",          "Three-dimensional trajectory and engagement visualizer"),
             ("💾 Saved Searches",         "Persistent workspace — search presets and research notes"),

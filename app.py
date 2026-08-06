@@ -9,18 +9,22 @@ Architecture (three-layer separation)
   modules/       Streamlit page renderers — each exports render()
   ui/            Reusable Streamlit components (sidebar, charts, theme)
 
-Pro-gated pages (trajectory, design lab, etc.) are noted in sidebar.py
-and auth/auth.py — they require a Pro tier subscription.
-
-Public pages (database browser, treaty guide, historical timeline,
-learning center, resource library) are free and require no login.
+Pro-gated pages require Pro tier (or DEV_UNLOCK_PRO=true for local use).
+Public pages are free and require no login.
 """
 
-import streamlit as st
-import sys
+from __future__ import annotations
+
 import os
+import sys
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 sys.path.insert(0, os.path.dirname(__file__))
+
+import streamlit as st
 
 st.set_page_config(
     page_title="Missile Research Platform v2",
@@ -30,35 +34,42 @@ st.set_page_config(
 )
 
 from ui.theme import inject_global_css
+
 inject_global_css()
 
 
-# ── Session-state initialisation ──────────────────────────────────────────────
+def _dev_unlock_pro() -> bool:
+    """Explicit local unlock only — missing Supabase alone does not grant Pro."""
+    return os.getenv("DEV_UNLOCK_PRO", "false").lower() in ("1", "true", "yes")
+
+
 def _init_session():
-    dev_mode = not bool(os.getenv("SUPABASE_URL"))
+    unlock = _dev_unlock_pro()
     defaults = {
-        "page":                  "home",
-        "auth.user_id":          "dev-user-001" if dev_mode else None,
-        "auth.email":            "dev@local"    if dev_mode else None,
-        "auth.tier":             "pro"          if dev_mode else "anon",
-        "auth.display_name":     "Dev User"     if dev_mode else "Guest",
-        "auth.access_token":     "dev-token"    if dev_mode else None,
-        "auth.refresh_token":    None,
-        "auth.is_authenticated": dev_mode,
-        "auth.token_expiry":     0,
-        "auth.show_auth_modal":  False,
-        "auth.auth_mode":        "login",
+        "page": "home",
+        "auth.user_id": "dev-user-001" if unlock else None,
+        "auth.email": "dev@local" if unlock else None,
+        "auth.tier": "pro" if unlock else "anon",
+        "auth.display_name": "Dev User" if unlock else "Guest",
+        "auth.access_token": "dev-token" if unlock else None,
+        "auth.refresh_token": None,
+        "auth.is_authenticated": unlock,
+        "auth.token_expiry": 0,
+        "auth.stripe_customer_id": None,
+        "auth.show_auth_modal": False,
+        "auth.auth_mode": "login",
     }
     for k, v in defaults.items():
         if k not in st.session_state:
             st.session_state[k] = v
 
 
-def gate_page(required_tier: str, page_name: str) -> bool:
+def gate_page(required_tier: str, page_key: str, page_title: str) -> bool:
     """Return True if user can access; otherwise render upgrade wall and return False."""
     try:
         from auth.auth_guard import gate_page as _gate
-        return _gate(required_tier, page_name)
+
+        return _gate(required_tier, page_key, page_title)
     except ImportError:
         tier = st.session_state.get("auth.tier", "anon")
         tier_order = {"anon": 0, "free": 1, "pro": 2, "enterprise": 3}
@@ -69,11 +80,9 @@ def gate_page(required_tier: str, page_name: str) -> bool:
             f"""
             <div class='mp-gate'>
                 <div class='mp-gate-icon'>🔒</div>
-                <div class='mp-gate-title'>{page_name} — Pro Feature</div>
+                <div class='mp-gate-title'>{page_title} — Pro Feature</div>
                 <div class='mp-gate-body'>
-                    This analysis tool requires a Pro subscription.<br>
-                    Upgrade to unlock trajectory simulation, design lab,
-                    and advanced analysis modules.
+                    This analysis tool requires a Pro subscription.
                 </div>
             </div>
             """,
@@ -88,25 +97,32 @@ def gate_page(required_tier: str, page_name: str) -> bool:
         return False
 
 
-# ── Page router ───────────────────────────────────────────────────────────────
 def main():
     _init_session()
 
-    # Run auth setup if Supabase is configured
+    try:
+        from monitoring.health import init_monitoring
+
+        init_monitoring()
+    except Exception:
+        pass
+
     try:
         from auth.auth import setup as auth_setup
+
         auth_setup()
     except ImportError:
         pass
 
-    # Render auth modal if requested
     try:
         from auth.auth_modal import render_auth_modal
+
         render_auth_modal()
     except ImportError:
         pass
 
     from ui.sidebar import render as render_sidebar
+
     render_sidebar(default_page="home")
 
     page = st.session_state.get("page", "home")
@@ -114,93 +130,88 @@ def main():
     # ── Public pages ─────────────────────────────────────────────────────────
     if page == "home":
         from modules.onboarding import render
+
         render()
 
     elif page == "missile_database":
         from modules.missile_database import render
+
         render()
 
     elif page == "historical_timeline":
         from modules.historical_timeline import render
+
         render()
 
     elif page == "treaty_guide":
         from modules.treaty_guide import render
+
         render()
 
     elif page == "resource_library":
         from modules.resource_library import render
+
         render()
 
     elif page == "learning_center":
         from modules.learning_center import render
+
         render()
 
-    # ── Pro pages (gated) ─────────────────────────────────────────────────────
+    # ── Pro pages (gated by page_key) ─────────────────────────────────────────
     elif page == "trajectory":
-        if gate_page("pro", "Trajectory Simulator"):
+        if gate_page("pro", "trajectory", "Trajectory Simulator"):
             from modules.trajectory_simulator import render
+
             render()
 
     elif page == "propulsion":
-        if gate_page("pro", "Propulsion Analysis"):
+        if gate_page("pro", "propulsion", "Propulsion Analysis"):
             from modules.propulsion_analysis import render
+
             render()
 
     elif page == "reentry":
-        if gate_page("pro", "Reentry Analysis"):
+        if gate_page("pro", "reentry", "Reentry Analysis"):
             from modules.reentry_analysis import render
+
             render()
 
     elif page == "hypersonic":
-        if gate_page("pro", "Hypersonic Lab"):
+        if gate_page("pro", "hypersonic", "Hypersonic Lab"):
             from modules.hypersonic_lab import render
+
             render()
 
     elif page == "defense_lab":
-        if gate_page("pro", "Defense Systems Lab"):
+        if gate_page("pro", "defense_lab", "Defense Systems Lab"):
             from modules.defense_lab import render
-            render()
 
-    elif page == "saturation":
-        if gate_page("pro", "Saturation Modeler"):
-            from modules.saturation_lab import render
             render()
 
     elif page == "visualizer":
-        if gate_page("pro", "3D Trajectory Visualizer"):
+        if gate_page("pro", "visualizer", "3D Trajectory Visualizer"):
             from modules.trajectory_visualizer import render
+
             render()
 
     elif page == "design_lab":
-        if gate_page("pro", "Missile Design Lab"):
+        if gate_page("pro", "design_lab", "Missile Design Lab"):
             from modules.design_lab import render
-            render()
 
-    elif page == "bom_manager":
-        if gate_page("pro", "BOM Manager"):
-            from modules.bom_manager import render
-            render()
-
-    elif page == "manufacturing":
-        if gate_page("pro", "Manufacturing Hub"):
-            from modules.manufacturing_hub import render
-            render()
-
-    elif page == "supply_chain":
-        if gate_page("pro", "Supply Chain"):
-            from modules.supply_chain import render
             render()
 
     # ── Admin pages ───────────────────────────────────────────────────────────
     elif page == "admin":
-        if gate_page("enterprise", "Admin Dashboard"):
+        if gate_page("enterprise", "admin", "Admin Dashboard"):
             from admin.admin_dashboard import render
+
             render()
 
     elif page == "admin_ops":
-        if gate_page("enterprise", "GrowthOps"):
+        if gate_page("enterprise", "admin_ops", "GrowthOps"):
             from admin.admin_ops import render
+
             render()
 
     else:
@@ -209,7 +220,20 @@ def main():
             st.session_state["page"] = "home"
             st.rerun()
 
-    # ── Footer ────────────────────────────────────────────────────────────────
+    try:
+        from analytics.tracker import track
+
+        track("page_view", {"page": page})
+    except Exception:
+        pass
+
+    try:
+        from feedback.feedback_widget import render_feedback_bar
+
+        render_feedback_bar(page=page)
+    except Exception:
+        pass
+
     st.markdown("---")
     st.markdown(
         "<div style='text-align:center; color:#6B6F84; font-size:0.78rem;'>"
@@ -220,5 +244,5 @@ def main():
     )
 
 
-if __name__ == "__main__" or True:
-    main()
+# Streamlit re-executes this script on every interaction.
+main()

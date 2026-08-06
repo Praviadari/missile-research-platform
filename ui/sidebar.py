@@ -31,22 +31,17 @@ PAGE_GROUPS = {
         ("🌡️ Reentry Analysis",          "reentry"),
         ("⚡ Hypersonic Lab",            "hypersonic"),
         ("🛡️ Defense Systems Lab",       "defense_lab"),
-        ("💥 Saturation Modeler",        "saturation"),
         ("🌐 3D Visualizer",             "visualizer"),
     ],
     "⚡ Pro — Design": [
         ("🛠️ Design Lab",               "design_lab"),
-        ("📦 BOM Manager",              "bom_manager"),
-        ("🏭 Manufacturing Hub",        "manufacturing"),
-        ("🔗 Supply Chain",             "supply_chain"),
     ],
 }
 
 # Pages requiring at least Pro tier
 PRO_PAGES = {
     "trajectory", "propulsion", "reentry", "hypersonic",
-    "defense_lab", "saturation", "visualizer",
-    "design_lab", "bom_manager", "manufacturing", "supply_chain",
+    "defense_lab", "visualizer", "design_lab",
 }
 
 ALL_PAGES: list[tuple[str, str]] = [
@@ -61,9 +56,16 @@ def _current_tier() -> str:
 
 
 def _is_admin() -> bool:
-    if not os.getenv("SUPABASE_URL"):
+    """Admin nav only for configured admin/enterprise users (or DEV_UNLOCK_PRO)."""
+    if os.getenv("DEV_UNLOCK_PRO", "false").lower() in ("1", "true", "yes"):
         return True
-    admin_ids = [x.strip() for x in os.getenv("ADMIN_USER_IDS", "").split(",") if x.strip()]
+    admin_ids = {
+        x.strip()
+        for x in (
+            os.getenv("ADMIN_USER_IDS", "") + "," + os.getenv("ENTERPRISE_USER_IDS", "")
+        ).split(",")
+        if x.strip()
+    }
     return st.session_state.get("auth.user_id", "") in admin_ids
 
 

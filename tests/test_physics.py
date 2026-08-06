@@ -44,8 +44,12 @@ class TestDragModels:
         cd = cd_cone_cylinder(0.5)
         assert 0.0 < cd < 0.5
 
-    def test_cone_supersonic_higher(self):
-        assert cd_cone_cylinder(2.0) > cd_cone_cylinder(0.5)
+    def test_cone_wave_drag_increases_with_half_angle(self):
+        """At fixed Mach, blunter cones produce higher Cd."""
+        assert cd_cone_cylinder(2.0, 20.0) > cd_cone_cylinder(2.0, 5.0)
+
+    def test_cone_transonic_not_below_floor(self):
+        assert cd_cone_cylinder(1.0) > 0.05
 
     def test_cone_always_positive(self):
         for m in [0.3, 1.0, 3.0, 8.0]:
@@ -112,6 +116,31 @@ class TestBallisticTrajectory:
         _, pts_no_drag   = self._sim(drag="none")
         _, pts_with_drag = self._sim(drag="cone")
         assert pts_with_drag[-1].x < pts_no_drag[-1].x
+
+    def test_drag_uses_mass_and_area(self):
+        """Heavier mass (same Cd·A) → less deceleration → longer range."""
+        light = BallisticTrajectory(
+            45, 3000, 80_000, "cone",
+            reference_area_m2=0.3, mass_kg=200.0, dt=1.0,
+        )
+        heavy = BallisticTrajectory(
+            45, 3000, 80_000, "cone",
+            reference_area_m2=0.3, mass_kg=2000.0, dt=1.0,
+        )
+        r_light = light.simulate()[-1].x
+        r_heavy = heavy.simulate()[-1].x
+        assert r_heavy > r_light
+
+    def test_ballistic_coeff_overrides_mass_area(self):
+        a = BallisticTrajectory(
+            45, 2500, 60_000, "cone",
+            ballistic_coeff_kg_m2=800.0, mass_kg=100.0, dt=1.0,
+        )
+        b = BallisticTrajectory(
+            45, 2500, 60_000, "cone",
+            ballistic_coeff_kg_m2=800.0, mass_kg=9000.0, dt=1.0,
+        )
+        assert abs(a.simulate()[-1].x - b.simulate()[-1].x) < 1.0
 
     def test_velocity_always_positive(self):
         _, pts = self._sim()

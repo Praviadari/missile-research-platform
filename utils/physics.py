@@ -110,7 +110,8 @@ class BallisticTrajectory:
         burnout_altitude_m: float = 80_000.0,
         cd_model: str = "cone",        # "cone" | "sphere" | "none"
         reference_area_m2: float = 0.3,  # πr² for ~30 cm radius
-        ballistic_coeff_kg_m2: Optional[float] = None,  # overrides cd+area
+        ballistic_coeff_kg_m2: Optional[float] = None,  # overrides cd+area+mass
+        mass_kg: float = 500.0,        # used when beta is not provided
         dt: float = 0.5,              # integration timestep (s)
     ):
         self.launch_angle    = math.radians(launch_angle_deg)
@@ -119,9 +120,10 @@ class BallisticTrajectory:
         self.cd_model        = cd_model
         self.A_ref           = reference_area_m2
         self.beta            = ballistic_coeff_kg_m2  # β = m/(Cd*A)
+        self.mass            = max(float(mass_kg), 1e-6)
         self.dt              = dt
 
-    def _cd(self, mach: float) -> float:
+    def _cd(self, mach: float) -> float:  # noqa: D401
         if self.cd_model == "none":    return 0.0
         if self.cd_model == "sphere":  return cd_sphere(mach)
         return cd_cone_cylinder(mach)
@@ -136,13 +138,13 @@ class BallisticTrajectory:
         mach  = v / sos if sos > 0 else 0.0
         cd    = self._cd(mach)
 
-        # Drag deceleration
+        # Drag deceleration a = D/m = ½ ρ v² Cd A / m  (or ½ ρ v² / β)
         if self.beta is not None:
             a_drag = 0.5 * rho * v**2 / self.beta
+        elif cd <= 0.0:
+            a_drag = 0.0
         else:
-            a_drag = 0.5 * rho * v**2 * cd * self.A_ref  # per unit mass needs m
-            # Without mass, use ballistic coeff β=1 default
-            a_drag = 0.5 * rho * v**2 * cd  # normalised
+            a_drag = 0.5 * rho * v**2 * cd * self.A_ref / self.mass
 
         if v > 1e-6:
             ax = -a_drag * vx / v

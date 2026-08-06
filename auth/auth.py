@@ -2,37 +2,59 @@
 auth/auth.py
 =============
 Authentication layer — Supabase Auth integration.
-Identical in structure to drone_platform_v3/auth/auth.py.
 Set SUPABASE_URL and SUPABASE_ANON_KEY in .env to activate.
 
 Session-state keys written here:
   auth.user_id, auth.email, auth.tier, auth.display_name,
-  auth.access_token, auth.is_authenticated
+  auth.access_token, auth.is_authenticated, auth.stripe_customer_id
 """
 
-import os, logging, time
+from __future__ import annotations
+
+import logging
+import os
+import time
+
 import streamlit as st
 
 logger = logging.getLogger(__name__)
 
-SUPABASE_URL      = os.getenv("SUPABASE_URL", "")
+SUPABASE_URL = os.getenv("SUPABASE_URL", "")
 SUPABASE_ANON_KEY = os.getenv("SUPABASE_ANON_KEY", "")
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "")
-ENTERPRISE_USER_IDS = set(os.getenv("ENTERPRISE_USER_IDS", "").split(","))
 
-PUBLIC_PAGES = {"home", "missile_database", "historical_timeline", "treaty_guide",
-                "resource_library", "learning_center"}
+ADMIN_USER_IDS = {
+    x.strip() for x in os.getenv("ADMIN_USER_IDS", "").split(",") if x.strip()
+}
+ENTERPRISE_USER_IDS = {
+    x.strip() for x in os.getenv("ENTERPRISE_USER_IDS", "").split(",") if x.strip()
+} | ADMIN_USER_IDS
 
-PRO_PAGES = {"trajectory", "propulsion", "reentry", "hypersonic", "defense_lab",
-             "saturation", "visualizer", "design_lab", "bom_manager",
-             "manufacturing", "supply_chain"}
+PUBLIC_PAGES = {
+    "home",
+    "missile_database",
+    "historical_timeline",
+    "treaty_guide",
+    "resource_library",
+    "learning_center",
+}
+
+PRO_PAGES = {
+    "trajectory",
+    "propulsion",
+    "reentry",
+    "hypersonic",
+    "defense_lab",
+    "visualizer",
+    "design_lab",
+}
 
 ENTERPRISE_PAGES = {"admin", "admin_ops"}
 
 TIER_LABELS = {
-    "anon":       ("🔓 Free",       "#6B6F84"),
-    "free":       ("🔓 Free",       "#6B6F84"),
-    "pro":        ("⚡ Pro",         "#E74C3C"),
+    "anon": ("🔓 Free", "#6B6F84"),
+    "free": ("🔓 Free", "#6B6F84"),
+    "pro": ("⚡ Pro", "#E74C3C"),
     "enterprise": ("🏢 Enterprise", "#FFD700"),
 }
 
@@ -40,7 +62,7 @@ TIER_LABELS = {
 def setup():
     """Called once per app load. Verifies Supabase token if present."""
     if not SUPABASE_URL:
-        return  # dev mode — session already initialised in app.py
+        return
     token = st.session_state.get("auth.access_token")
     if token and _token_valid():
         _resolve_tier()
@@ -56,6 +78,7 @@ def _token_valid() -> bool:
 def _refresh_token():
     try:
         import requests
+
         refresh = st.session_state.get("auth.refresh_token")
         if not refresh:
             _clear_session()
@@ -67,8 +90,7 @@ def _refresh_token():
             timeout=8,
         )
         if r.ok:
-            data = r.json()
-            _set_session(data)
+            _set_session(r.json())
         else:
             _clear_session()
     except Exception as e:
@@ -82,10 +104,11 @@ def _resolve_tier():
         return
     if STRIPE_SECRET_KEY:
         try:
-            import stripe
-            stripe.api_key = STRIPE_SECRET_KEY
-            subs = stripe.Subscription.list(customer=st.session_state.get("auth.stripe_customer_id",""), status="active", limit=1)
-            st.session_state["auth.tier"] = "pro" if subs.data else "free"
+            from billing.stripe_billing import get_tier_from_stripe
+
+            st.session_state["auth.tier"] = get_tier_from_stripe(
+                st.session_state.get("auth.stripe_customer_id")
+            )
         except Exception:
             st.session_state["auth.tier"] = "free"
     else:
@@ -95,6 +118,7 @@ def _resolve_tier():
 def sign_in(email: str, password: str) -> tuple[bool, str]:
     try:
         import requests
+
         r = requests.post(
             f"{SUPABASE_URL}/auth/v1/token?grant_type=password",
             headers={"apikey": SUPABASE_ANON_KEY, "Content-Type": "application/json"},
@@ -112,6 +136,7 @@ def sign_in(email: str, password: str) -> tuple[bool, str]:
 def sign_up(email: str, password: str) -> tuple[bool, str]:
     try:
         import requests
+
         r = requests.post(
             f"{SUPABASE_URL}/auth/v1/signup",
             headers={"apikey": SUPABASE_ANON_KEY, "Content-Type": "application/json"},
@@ -138,31 +163,64 @@ def current_tier() -> str:
 
 
 def can_access(page_key: str) -> bool:
+    """Return True only for known pages the current tier may open. Default deny."""
     tier = current_tier()
-    if page_key in PUBLIC_PAGES:      return True
-    if page_key in ENTERPRISE_PAGES:  return tier == "enterprise"
-    if page_key in PRO_PAGES:         return tier in ("pro", "enterprise")
-    return True
+    if page_key in PUBLIC_PAGES:
+        return True
+    if page_key in ENTERPRISE_PAGES:
+        return tier == "enterprise"
+    if page_key in PRO_PAGES:
+        return tier in ("pro", "enterprise")
+    return False
+
+
+def _ensure_stripe_customer(user_id: str, email: str, meta: dict) -> str | None:
+    cid = meta.get("stripe_customer_id") or st.session_state.get("auth.stripe_customer_id")
+    if cid:
+        return cid
+    if not STRIPE_SECRET_KEY or not email:
+        return None
+    try:
+        from billing.stripe_billing import create_customer
+
+        return create_customer(email, user_id)
+    except Exception as e:
+        logger.warning("Stripe customer ensure failed: %s", e)
+        return None
 
 
 def _set_session(data: dict):
     user = data.get("user", {})
-    meta = user.get("user_metadata", {})
-    st.session_state.update({
-        "auth.user_id":          user.get("id"),
-        "auth.email":            user.get("email"),
-        "auth.display_name":     meta.get("full_name") or user.get("email","").split("@")[0],
-        "auth.access_token":     data.get("access_token"),
-        "auth.refresh_token":    data.get("refresh_token"),
-        "auth.token_expiry":     time.time() + data.get("expires_in", 3600),
-        "auth.is_authenticated": True,
-    })
+    meta = user.get("user_metadata", {}) or {}
+    email = user.get("email", "") or ""
+    uid = user.get("id", "") or ""
+    st.session_state.update(
+        {
+            "auth.user_id": uid,
+            "auth.email": email,
+            "auth.display_name": meta.get("full_name")
+            or (email.split("@")[0] if email else "User"),
+            "auth.access_token": data.get("access_token"),
+            "auth.refresh_token": data.get("refresh_token"),
+            "auth.token_expiry": time.time() + data.get("expires_in", 3600),
+            "auth.is_authenticated": True,
+            "auth.stripe_customer_id": _ensure_stripe_customer(uid, email, meta),
+        }
+    )
     _resolve_tier()
 
 
 def _clear_session():
-    for k in ["auth.user_id","auth.email","auth.display_name","auth.access_token",
-              "auth.refresh_token","auth.token_expiry","auth.is_authenticated"]:
+    for k in [
+        "auth.user_id",
+        "auth.email",
+        "auth.display_name",
+        "auth.access_token",
+        "auth.refresh_token",
+        "auth.token_expiry",
+        "auth.is_authenticated",
+        "auth.stripe_customer_id",
+    ]:
         st.session_state[k] = None
     st.session_state["auth.tier"] = "anon"
     st.session_state["auth.is_authenticated"] = False

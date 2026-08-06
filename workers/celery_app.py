@@ -53,21 +53,11 @@ def generate_pdf_report(self, user_id: str, report_type: str, params: dict):
 
     Returns: {"url": "...", "filename": "..."}
     """
-    try:
-        # Import here to avoid loading heavy deps in main process
-        from reportlab.lib.pagesizes import A4
-        from reportlab.platypus import SimpleDocTemplate
-        import tempfile, json
-
-        filename = f"{report_type}_{user_id[:8]}.pdf"
-        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
-            doc = SimpleDocTemplate(tmp.name, pagesize=A4)
-            # TODO: Build report content from params using reportlab
-            doc.build([])  # placeholder
-            return {"filename": filename, "path": tmp.name, "status": "complete"}
-
-    except Exception as exc:
-        raise self.retry(exc=exc)
+    return {
+        "status": "not_implemented",
+        "error": f"PDF report type '{report_type}' is not implemented",
+        "user_id": user_id,
+    }
 
 
 @app.task(bind=True, max_retries=2)

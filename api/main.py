@@ -19,8 +19,9 @@ Endpoints:
 
 import json
 import os
-from typing import Optional, List
-from fastapi import FastAPI, HTTPException, Query
+from typing import Optional
+
+from fastapi import FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
@@ -29,10 +30,18 @@ app = FastAPI(
     version="2.0.0",
 )
 
+_cors_origins = [
+    o.strip()
+    for o in os.getenv(
+        "API_CORS_ORIGINS", "http://localhost:8501,http://localhost:8502"
+    ).split(",")
+    if o.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8501"],
-    allow_methods=["GET"],
+    allow_origins=_cors_origins,
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
@@ -131,3 +140,24 @@ def get_resources(resource_type: Optional[str] = Query(None, alias="type")):
     if resource_type:
         resources = [r for r in resources if r.get("type","").lower() == resource_type.lower()]
     return {"count": len(resources), "resources": resources}
+
+
+# ── Stripe webhook (billing lifecycle) ─────────────────────────────────────────
+
+@app.post("/stripe/webhook")
+async def stripe_webhook(
+    request: Request,
+    stripe_signature: Optional[str] = Header(None, alias="Stripe-Signature"),
+):
+    """Receive Stripe subscription lifecycle events."""
+    payload = await request.body()
+    if not stripe_signature:
+        raise HTTPException(status_code=400, detail="Missing Stripe-Signature header")
+    try:
+        from billing.stripe_billing import handle_webhook
+
+        return handle_webhook(payload, stripe_signature)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e)) from e

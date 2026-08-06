@@ -71,7 +71,10 @@ missile_platform_v2/
 │   └── test_units.py        # 30 unit tests — all passing
 │
 ├── alembic/
-│   └── env.py               # Database migration configuration
+│   ├── env.py               # Database migration configuration
+│   └── versions/            # Schema revisions
+├── docs/
+│   └── CODE_QUALITY_AUDIT.md
 │
 ├── .streamlit/config.toml   # Streamlit dark theme config
 ├── .github/workflows/ci.yml # GitHub Actions CI
@@ -85,29 +88,33 @@ missile_platform_v2/
 
 ## Quick Start
 
-### Development (no auth)
+### Development (local Pro unlock)
 
 ```bash
-# No Supabase/Stripe required — runs in dev mode with Pro tier unlocked
+cp .env.example .env
+# DEV_UNLOCK_PRO=true unlocks Pro locally without Supabase/Stripe
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+Without `DEV_UNLOCK_PRO=true`, the app starts as anonymous/free and Pro pages show the upgrade wall.
 
 ### Production (Docker)
 
 ```bash
 cp .env.example .env
-# Fill in SUPABASE_URL, SUPABASE_ANON_KEY, STRIPE_SECRET_KEY
+# Fill in SUPABASE_URL, SUPABASE_ANON_KEY, STRIPE_* as needed
+# Set DEV_UNLOCK_PRO=false for production
 docker-compose up -d
-# App:    http://localhost:8501
-# API:    http://localhost:8001/docs
-# Worker: celery monitoring at localhost:5555 (flower)
+docker-compose run --rm migrate   # alembic upgrade head
+# App: http://localhost:8501
+# API: http://localhost:8001/docs
 ```
 
 ### Run Tests
 
 ```bash
-pytest tests/ -v --cov=utils --cov-report=term-missing
+pytest tests/ -v --cov=utils --cov=auth --cov-report=term-missing
 ```
 
 ---
@@ -117,9 +124,9 @@ pytest tests/ -v --cov=utils --cov-report=term-missing
 | Page | Key | Description |
 | ---- | --- | ----------- |
 | 🏠 Home | `home` | Platform overview and navigation guide |
-| 📋 Missile Database | `missile_database` | 32+ systems — table, card, and chart views |
+| 📋 Missile Database | `missile_database` | 31 systems — table, card, and chart views |
 | 📅 Historical Timeline | `historical_timeline` | 8 documented strike events with intercept data |
-| 📜 Treaty Guide | `treaty_guide` | NPT, INF, New START, MTCR + MTCR threshold checker |
+| 📜 Treaty Guide | `treaty_guide` | NPT, INF, New START, MTCR + related frameworks |
 | 🎓 Learning Center | `learning_center` | Physics education: ballistics, propulsion, guidance, defense |
 | 📖 Resource Library | `resource_library` | Curated bibliography of 17 public sources |
 
@@ -132,7 +139,6 @@ pytest tests/ -v --cov=utils --cov-report=term-missing
 | 🌡️ Reentry Analysis | `reentry` | Atmospheric reentry heating and deceleration |
 | ⚡ Hypersonic Lab | `hypersonic` | HGV, scramjet, Mach regime comparisons |
 | 🛡️ Defense Systems Lab | `defense_lab` | Engagement envelopes, intercept geometry |
-| 💥 Saturation Modeler | `saturation` | Monte Carlo defense saturation analysis |
 | 🌐 3D Visualizer | `visualizer` | Three-dimensional trajectory visualizer |
 | 🛠️ Design Lab | `design_lab` | 7-step guided research workflow |
 
@@ -161,10 +167,12 @@ See `.env.example` for full list. Required for production:
 
 | Variable | Purpose |
 | -------- | ------- |
+| `DEV_UNLOCK_PRO` | Local Pro unlock (`true`/`false`) |
 | `SUPABASE_URL` | Auth provider |
 | `SUPABASE_ANON_KEY` | Supabase public key |
 | `STRIPE_SECRET_KEY` | Billing |
 | `STRIPE_PRO_PRICE_ID` | Pro tier price |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook verification |
 | `DATABASE_URL` | PostgreSQL connection |
 | `REDIS_URL` | Celery broker |
 
@@ -176,23 +184,22 @@ Optional:
 | `SENTRY_DSN` | Error tracking |
 | `STRIPE_PAYMENT_LINK` | Hosted checkout URL |
 | `ADMIN_USER_IDS` | Comma-separated admin Supabase UUIDs |
+| `ENTERPRISE_USER_IDS` | Enterprise tier allow-list |
 
 ---
 
 ## What Is NOT in This Codebase
 
-The following modules were **not implemented** due to their operational
-implications beyond academic research:
+The following capabilities are intentionally absent (research/education scope only):
 
 - ❌ Defense saturation calculator that outputs "missiles needed to overwhelm"
 - ❌ Attack planning optimizer / target sequencing
 - ❌ Intercept probability calculator tied to specific real-world defense deployments
 - ❌ Weapon design wizard outputting operational missile configurations
+- ❌ BOM / manufacturing / supply-chain tooling (removed from nav; not product scope)
 
-These functions cross from research/education into operational planning aid.
-The platform's Pro modules (trajectory, propulsion, defense lab) provide
-equivalent engineering insight for research purposes without the
-targeting/saturation planning functionality.
+Pro modules (trajectory, propulsion, defense lab, design lab) provide engineering
+insight for research without targeting or saturation-planning functionality.
 
 ---
 

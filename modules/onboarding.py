@@ -45,11 +45,11 @@ def render():
     st.markdown(section_header("📊 Platform Overview"), unsafe_allow_html=True)
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.markdown(metric_box("🚀", "32", "Missile Systems\nin Database"), unsafe_allow_html=True)
+        st.markdown(metric_box("🚀", "31", "Missile Systems\nin Database"), unsafe_allow_html=True)
     with col2:
         st.markdown(metric_box("📅", "8", "Historical\nStrike Events"), unsafe_allow_html=True)
     with col3:
-        st.markdown(metric_box("📜", "7", "Arms Control\nTreaties"), unsafe_allow_html=True)
+        st.markdown(metric_box("📜", "8", "Arms Control\nTreaties"), unsafe_allow_html=True)
     with col4:
         st.markdown(metric_box("📖", "17", "Academic\nResources"), unsafe_allow_html=True)
 
@@ -63,7 +63,7 @@ def render():
         st.markdown("### 📋 Missile Database (Free)")
         st.markdown(
             card(
-                "Browse technical specifications for 32+ missile and interceptor systems "
+                "Browse technical specifications for 31 missile and interceptor systems "
                 "worldwide — Iran, US, Russia, China, Israel, North Korea. "
                 "Filter by category, country, range, and propulsion type. "
                 "All specs sourced from CSIS, IISS, Janes, and declassified US DoD reports.",
