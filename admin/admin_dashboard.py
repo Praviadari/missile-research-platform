@@ -145,26 +145,46 @@ def _render_experiments():
 def _render_users():
     st.markdown(section_header("👥 User Management"), unsafe_allow_html=True)
 
+    try:
+        from database.session import tier_counts
+
+        counts = tier_counts()
+    except Exception:
+        counts = {}
+
+    if counts:
+        cols = st.columns(max(len(counts), 1))
+        for i, (tier, n) in enumerate(sorted(counts.items())):
+            with cols[i % len(cols)]:
+                st.markdown(
+                    metric_box("👤", str(n), f"{tier} users"),
+                    unsafe_allow_html=True,
+                )
+        st.caption("Counts from local/platform database (`users` table).")
+    else:
+        st.markdown(
+            card(
+                "No durable user rows yet. Set <code>DATABASE_URL</code> and sign in "
+                "users (or run migrations) to populate tier counts.",
+                variant="info",
+            ),
+            unsafe_allow_html=True,
+        )
+
     if not os.getenv("SUPABASE_URL"):
         st.markdown(
             card(
-                "🔧 <strong>Dev mode:</strong> Supabase not configured. "
-                "User management is unavailable in local dev mode.",
+                "🔧 <strong>Dev mode:</strong> Supabase admin directory is unavailable "
+                "without <code>SUPABASE_URL</code>.",
                 variant="warning",
             ),
             unsafe_allow_html=True,
         )
-        return
-
-    st.markdown(
-        card(
-            "User management queries Supabase directly. "
-            "Implement the Supabase admin queries here using "
-            "the service-role key (SUPABASE_SERVICE_ROLE_KEY).",
-            variant="info",
-        ),
-        unsafe_allow_html=True,
-    )
+    else:
+        st.caption(
+            "Supabase Auth user directory still requires SUPABASE_SERVICE_ROLE_KEY "
+            "for full account management (not exposed in this UI)."
+        )
 
 
 def sub_header(text: str) -> str:

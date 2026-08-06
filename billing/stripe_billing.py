@@ -97,12 +97,29 @@ def create_customer(email: str, user_id: str) -> str | None:
         return None
 
 
+def _tier_from_subscription_obj(obj: dict) -> str:
+    """Map a Stripe subscription object to platform tier."""
+    if obj.get("status") not in ("active", "trialing"):
+        return "free"
+    enterprise_prices = {
+        x.strip()
+        for x in os.getenv("STRIPE_ENTERPRISE_PRICE_IDS", "").split(",")
+        if x.strip()
+    }
+    items = (obj.get("items") or {}).get("data") or []
+    for item in items:
+        price_id = (item.get("price") or {}).get("id", "")
+        if price_id and price_id in enterprise_prices:
+            return "enterprise"
+    return "pro"
+
+
 def handle_webhook(payload: bytes, sig_header: str) -> dict:
     """
     Handle incoming Stripe webhook event.
     Call from FastAPI POST /stripe/webhook endpoint.
 
-    Returns dict with {"handled": True, "event_type": "..."} or raises.
+    Persists tier updates to the users table when DATABASE_URL is set.
     """
     s = _stripe()
     if s is None:
@@ -113,19 +130,34 @@ def handle_webhook(payload: bytes, sig_header: str) -> dict:
         raise ValueError(f"Webhook verification failed: {e}")
 
     etype = event["type"]
-    obj   = event["data"]["object"]
+    obj = event["data"]["object"]
+    customer_id = obj.get("customer")
+    persisted = False
 
     if etype in ("customer.subscription.created", "customer.subscription.updated"):
-        # Update user tier in your database here
-        logger.info("Subscription %s: customer=%s", etype, obj.get("customer"))
+        tier = _tier_from_subscription_obj(obj)
+        logger.info("Subscription %s: customer=%s tier=%s", etype, customer_id, tier)
+        if customer_id:
+            from database.session import update_tier_by_stripe_customer
+
+            persisted = update_tier_by_stripe_customer(customer_id, tier)
 
     elif etype == "customer.subscription.deleted":
-        logger.info("Subscription cancelled: customer=%s", obj.get("customer"))
+        logger.info("Subscription cancelled: customer=%s", customer_id)
+        if customer_id:
+            from database.session import update_tier_by_stripe_customer
+
+            persisted = update_tier_by_stripe_customer(customer_id, "free")
 
     elif etype == "invoice.payment_failed":
-        logger.warning("Payment failed: customer=%s", obj.get("customer"))
+        logger.warning("Payment failed: customer=%s", customer_id)
 
-    return {"handled": True, "event_type": etype}
+    return {
+        "handled": True,
+        "event_type": etype,
+        "customer_id": customer_id,
+        "persisted": persisted,
+    }
 
 
 def render_upgrade_cta(compact: bool = False) -> None:

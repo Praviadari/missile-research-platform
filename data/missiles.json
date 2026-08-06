@@ -10,14 +10,27 @@
     "stages": 1,
     "peak_mach": 3.5,
     "cep_m": 100,
-    "guidance": ["INS"],
+    "guidance": [
+      "INS"
+    ],
     "mass_kg": 3450,
     "diameter_m": 0.61,
     "length_m": 8.86,
     "first_test": 2002,
     "operational": true,
     "status_notes": "Widely deployed; extensively used by Iranian-backed groups.",
-    "sources": ["CSIS Missile Defense Project", "IISS Military Balance 2024"]
+    "sources": [
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS Military Balance 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "Zolfaghar",
@@ -30,14 +43,28 @@
     "stages": 1,
     "peak_mach": 4.2,
     "cep_m": 50,
-    "guidance": ["INS", "GPS"],
+    "guidance": [
+      "INS",
+      "GPS"
+    ],
     "mass_kg": 4100,
     "diameter_m": 0.61,
     "length_m": 10.0,
     "first_test": 2016,
     "operational": true,
     "status_notes": "Extended-range Fateh variant. Used in Syria strike 2017.",
-    "sources": ["CSIS Missile Defense Project", "ISS Military Balance 2024"]
+    "sources": [
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "ISS Military Balance 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "Dezful",
@@ -50,14 +77,24 @@
     "stages": 1,
     "peak_mach": 4.5,
     "cep_m": 30,
-    "guidance": ["INS", "GPS", "Terminal optical"],
+    "guidance": [
+      "INS",
+      "GPS",
+      "Terminal optical"
+    ],
     "mass_kg": 4500,
     "diameter_m": 0.61,
     "length_m": 11.0,
     "first_test": 2019,
     "operational": true,
     "status_notes": "Further extended Fateh family, unveiled Feb 2019.",
-    "sources": ["CSIS Missile Defense Project"]
+    "sources": [
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Qiam-1",
@@ -70,14 +107,27 @@
     "stages": 1,
     "peak_mach": 3.8,
     "cep_m": 500,
-    "guidance": ["INS"],
+    "guidance": [
+      "INS"
+    ],
     "mass_kg": 6200,
     "diameter_m": 0.88,
     "length_m": 11.0,
     "first_test": 2010,
     "operational": true,
     "status_notes": "Scud-B derivative, finless design. Used in Iraq 2018 and Ain al-Assad 2020.",
-    "sources": ["CSIS Missile Defense Project", "IISS"]
+    "sources": [
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Shahab-3",
@@ -90,14 +140,27 @@
     "stages": 1,
     "peak_mach": 7.0,
     "cep_m": 2500,
-    "guidance": ["INS"],
+    "guidance": [
+      "INS"
+    ],
     "mass_kg": 16200,
     "diameter_m": 1.25,
     "length_m": 16.0,
     "first_test": 1998,
     "operational": true,
     "status_notes": "Based on North Korean Nodong-1 / Soviet Scud lineage. Large CEP limits military utility.",
-    "sources": ["CSIS", "NTI"]
+    "sources": [
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "NTI",
+        "url": "https://www.nti.org/countries/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Ghadr-110",
@@ -110,14 +173,22 @@
     "stages": 1,
     "peak_mach": 8.0,
     "cep_m": 800,
-    "guidance": ["INS"],
+    "guidance": [
+      "INS"
+    ],
     "mass_kg": 16000,
     "diameter_m": 1.25,
     "length_m": 18.0,
     "first_test": 2004,
     "operational": true,
     "status_notes": "Extended range Shahab-3 variant.",
-    "sources": ["CSIS Missile Defense Project"]
+    "sources": [
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Emad",
@@ -130,14 +201,28 @@
     "stages": 1,
     "peak_mach": 8.0,
     "cep_m": 500,
-    "guidance": ["INS", "Terminal guidance"],
+    "guidance": [
+      "INS",
+      "Terminal guidance"
+    ],
     "mass_kg": 16500,
     "diameter_m": 1.25,
     "length_m": 16.5,
     "first_test": 2015,
     "operational": true,
     "status_notes": "First Iranian MRBM with maneuvering reentry vehicle for improved accuracy.",
-    "sources": ["IISS", "CSIS"]
+    "sources": [
+      {
+        "label": "IISS",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": null
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Sejjil",
@@ -150,14 +235,27 @@
     "stages": 2,
     "peak_mach": 9.0,
     "cep_m": 600,
-    "guidance": ["INS"],
+    "guidance": [
+      "INS"
+    ],
     "mass_kg": 21500,
     "diameter_m": 1.25,
     "length_m": 18.0,
     "first_test": 2008,
     "operational": true,
     "status_notes": "Longest-range solid-fuel Iranian ballistic missile. Faster launch readiness than liquid-fuel variants.",
-    "sources": ["CSIS Missile Defense Project", "IISS Military Balance"]
+    "sources": [
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS Military Balance",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Khorramshahr",
@@ -170,14 +268,28 @@
     "stages": 1,
     "peak_mach": 8.0,
     "cep_m": 60,
-    "guidance": ["INS", "Terminal radar/optical"],
+    "guidance": [
+      "INS",
+      "Terminal radar/optical"
+    ],
     "mass_kg": 22000,
     "diameter_m": 1.25,
     "length_m": 13.0,
     "first_test": 2017,
     "operational": true,
     "status_notes": "Largest payload among Iranian MRBMs. MaRV enables improved accuracy.",
-    "sources": ["CSIS", "IISS 2024"]
+    "sources": [
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "Kheibar Shekan",
@@ -190,15 +302,38 @@
     "stages": 2,
     "peak_mach": 10.0,
     "cep_m": 50,
-    "guidance": ["INS", "GPS", "Terminal radar"],
+    "guidance": [
+      "INS",
+      "GPS",
+      "Terminal radar"
+    ],
     "mass_kg": 15000,
-    "diameter_m": 1.10,
+    "diameter_m": 1.1,
     "length_m": 10.5,
-    "countermeasures": ["MaRV maneuverability", "Maneuvering terminal phase"],
+    "countermeasures": [
+      "MaRV maneuverability",
+      "Maneuvering terminal phase"
+    ],
     "first_test": 2022,
     "operational": true,
     "status_notes": "Used in Operation True Promise II (October 2024). Solid fuel enables rapid launch. Maneuvering reentry increases difficulty for interceptors.",
-    "sources": ["CSIS Missile Defense Project", "IISS 2024", "Janes 2024"]
+    "sources": [
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      },
+      {
+        "label": "Janes 2024",
+        "url": "https://www.janes.com/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "Fattah-1",
@@ -211,16 +346,39 @@
     "stages": 2,
     "peak_mach": 15.0,
     "cep_m": 30,
-    "guidance": ["INS", "Maneuvering HGV"],
+    "guidance": [
+      "INS",
+      "Maneuvering HGV"
+    ],
     "mass_kg": 12000,
-    "diameter_m": 0.90,
+    "diameter_m": 0.9,
     "length_m": 13.5,
-    "countermeasures": ["Hypersonic glide vehicle", "Maneuvering reentry", "Altitude variation"],
+    "countermeasures": [
+      "Hypersonic glide vehicle",
+      "Maneuvering reentry",
+      "Altitude variation"
+    ],
     "first_test": 2023,
     "operational": false,
     "_uncertain": true,
     "status_notes": "Unveiled June 2023. Claimed Mach 15 HGV. Independent verification limited. Operational status uncertain as of 2025.",
-    "sources": ["CSIS Missile Defense Project", "IISS Military Balance 2024", "Arms Control Association 2023"]
+    "sources": [
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS Military Balance 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      },
+      {
+        "label": "Arms Control Association 2023",
+        "url": "https://www.armscontrol.org/factsheets",
+        "year": 2023
+      }
+    ]
   },
   {
     "name": "Fattah-2",
@@ -233,15 +391,30 @@
     "stages": 2,
     "peak_mach": 10.0,
     "cep_m": 40,
-    "guidance": ["INS", "GPS", "Hypersonic glide"],
+    "guidance": [
+      "INS",
+      "GPS",
+      "Hypersonic glide"
+    ],
     "mass_kg": 11000,
-    "diameter_m": 0.90,
+    "diameter_m": 0.9,
     "length_m": 14.0,
     "_uncertain": true,
     "first_test": 2023,
     "operational": false,
     "status_notes": "Unveiled November 2023 alongside Fattah-1. Claims of scramjet propulsion disputed by independent analysts. Limited open-source verification.",
-    "sources": ["CSIS Missile Defense Project 2023", "Arms Control Association"]
+    "sources": [
+      {
+        "label": "CSIS Missile Defense Project 2023",
+        "url": "https://missilethreat.csis.org/",
+        "year": 2023
+      },
+      {
+        "label": "Arms Control Association",
+        "url": "https://www.armscontrol.org/factsheets",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Soumar",
@@ -254,14 +427,28 @@
     "stages": 1,
     "peak_mach": 0.8,
     "cep_m": 100,
-    "guidance": ["INS", "TERCOM"],
+    "guidance": [
+      "INS",
+      "TERCOM"
+    ],
     "mass_kg": 1200,
     "diameter_m": 0.51,
     "length_m": 7.0,
     "first_test": 2015,
     "operational": true,
     "status_notes": "Derived from Soviet Kh-55. Terrain-following flight profile.",
-    "sources": ["CSIS", "IISS"]
+    "sources": [
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Hoveizeh",
@@ -274,14 +461,29 @@
     "stages": 1,
     "peak_mach": 0.85,
     "cep_m": 50,
-    "guidance": ["INS", "GPS", "TERCOM"],
+    "guidance": [
+      "INS",
+      "GPS",
+      "TERCOM"
+    ],
     "mass_kg": 1000,
     "diameter_m": 0.51,
     "length_m": 6.5,
     "first_test": 2019,
     "operational": true,
     "status_notes": "Longer-range variant of Soumar. Unveiled February 2019.",
-    "sources": ["CSIS", "IISS 2024"]
+    "sources": [
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "Tomahawk Block V",
@@ -294,14 +496,35 @@
     "stages": 1,
     "peak_mach": 0.84,
     "cep_m": 5,
-    "guidance": ["INS", "GPS", "TERCOM", "DSMAC"],
+    "guidance": [
+      "INS",
+      "GPS",
+      "TERCOM",
+      "DSMAC"
+    ],
     "mass_kg": 1300,
     "diameter_m": 0.53,
     "length_m": 5.56,
     "first_test": 2020,
     "operational": true,
     "status_notes": "Block V adds maritime strike capability (JMASM). In US Navy and allied service.",
-    "sources": ["US Navy NAVSEA", "CSIS", "Janes Naval Weapons 2024"]
+    "sources": [
+      {
+        "label": "US Navy NAVSEA",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "Janes Naval Weapons 2024",
+        "url": "https://www.janes.com/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "AGM-158B JASSM-ER",
@@ -314,14 +537,34 @@
     "stages": 1,
     "peak_mach": 0.85,
     "cep_m": 3,
-    "guidance": ["INS", "GPS", "Terminal IIR"],
+    "guidance": [
+      "INS",
+      "GPS",
+      "Terminal IIR"
+    ],
     "mass_kg": 1029,
     "diameter_m": 0.55,
     "length_m": 4.27,
     "first_test": 2014,
     "operational": true,
     "status_notes": "Extended-range variant of JASSM. Low-observable airframe.",
-    "sources": ["USAF", "Janes Air-Launched Weapons", "CSIS"]
+    "sources": [
+      {
+        "label": "USAF",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "Janes Air-Launched Weapons",
+        "url": "https://www.janes.com/",
+        "year": null
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "LRASM",
@@ -334,14 +577,34 @@
     "stages": 1,
     "peak_mach": 0.85,
     "cep_m": 3,
-    "guidance": ["INS", "GPS", "Multi-mode terminal"],
+    "guidance": [
+      "INS",
+      "GPS",
+      "Multi-mode terminal"
+    ],
     "mass_kg": 1100,
     "diameter_m": 0.55,
     "length_m": 4.27,
     "first_test": 2013,
     "operational": true,
     "status_notes": "Low-observable anti-ship cruise missile. AI-assisted target discrimination.",
-    "sources": ["USAF/USN", "CSIS Missile Defense Project", "Janes 2024"]
+    "sources": [
+      {
+        "label": "USAF/USN",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "Janes 2024",
+        "url": "https://www.janes.com/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "Iskander-M",
@@ -354,14 +617,35 @@
     "stages": 1,
     "peak_mach": 8.0,
     "cep_m": 10,
-    "guidance": ["INS", "DSMAC", "GLONASS", "Radar seeker"],
+    "guidance": [
+      "INS",
+      "DSMAC",
+      "GLONASS",
+      "Radar seeker"
+    ],
     "mass_kg": 3800,
     "diameter_m": 0.92,
     "length_m": 7.3,
     "first_test": 2004,
     "operational": true,
     "status_notes": "Highly accurate quasi-ballistic missile. Maneuvering depressed trajectory. Extensively used in Ukraine. INF Treaty range (500 km) — Russia disputed this classification.",
-    "sources": ["IISS Military Balance 2024", "CSIS", "Janes Land-Based Air Defence"]
+    "sources": [
+      {
+        "label": "IISS Military Balance 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "Janes Land-Based Air Defence",
+        "url": "https://www.janes.com/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Kalibr (3M14)",
@@ -374,14 +658,35 @@
     "stages": 1,
     "peak_mach": 0.9,
     "cep_m": 3,
-    "guidance": ["INS", "GLONASS", "TERCOM", "DSMAC"],
+    "guidance": [
+      "INS",
+      "GLONASS",
+      "TERCOM",
+      "DSMAC"
+    ],
     "mass_kg": 1770,
     "diameter_m": 0.53,
     "length_m": 6.2,
     "first_test": 1993,
     "operational": true,
     "status_notes": "Land-attack variant of Klub family. First combat use in Syria 2015. Extensively used in Ukraine since 2022.",
-    "sources": ["IISS", "CSIS", "Janes Naval Weapons 2024"]
+    "sources": [
+      {
+        "label": "IISS",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": null
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "Janes Naval Weapons 2024",
+        "url": "https://www.janes.com/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "Kinzhal",
@@ -394,14 +699,39 @@
     "stages": 1,
     "peak_mach": 10.0,
     "cep_m": 7,
-    "guidance": ["INS", "GLONASS", "Terminal guidance"],
+    "guidance": [
+      "INS",
+      "GLONASS",
+      "Terminal guidance"
+    ],
     "mass_kg": 3000,
     "diameter_m": 0.78,
     "length_m": 8.0,
     "first_test": 2018,
     "operational": true,
     "status_notes": "Air-launched quasi-ballistic from MiG-31K/Tu-22M3. Used in Ukraine. Intercepted by Patriot PAC-3 (May 2023) — demonstrated limits of hypersonic claims.",
-    "sources": ["IISS 2024", "CSIS", "Kyiv Independent reporting", "Janes Air-Launched Weapons"]
+    "sources": [
+      {
+        "label": "IISS 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "Kyiv Independent reporting",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "Janes Air-Launched Weapons",
+        "url": "https://www.janes.com/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Zircon (3M22)",
@@ -414,7 +744,11 @@
     "stages": 2,
     "peak_mach": 9.0,
     "cep_m": 20,
-    "guidance": ["INS", "GLONASS", "Terminal radar"],
+    "guidance": [
+      "INS",
+      "GLONASS",
+      "Terminal radar"
+    ],
     "mass_kg": 3000,
     "diameter_m": 0.67,
     "length_m": 10.0,
@@ -422,7 +756,23 @@
     "first_test": 2021,
     "operational": true,
     "status_notes": "Ship/sub-launched hypersonic cruise missile. Operational on Admiral Gorshkov-class frigates since 2023. Scramjet propulsion confirmed. Some range/CEP figures uncertain.",
-    "sources": ["IISS Military Balance 2024", "Russian MoD statements", "CSIS 2024"]
+    "sources": [
+      {
+        "label": "IISS Military Balance 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      },
+      {
+        "label": "Russian MoD statements",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "CSIS 2024",
+        "url": "https://missilethreat.csis.org/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "DF-21D",
@@ -435,14 +785,34 @@
     "stages": 2,
     "peak_mach": 10.0,
     "cep_m": 20,
-    "guidance": ["INS", "BeiDou", "Terminal radar/SAR"],
+    "guidance": [
+      "INS",
+      "BeiDou",
+      "Terminal radar/SAR"
+    ],
     "mass_kg": 14700,
     "diameter_m": 1.4,
     "length_m": 10.7,
     "first_test": 2005,
     "operational": true,
     "status_notes": "World's first operational anti-ship ballistic missile (ASBM). Designed to target carrier battle groups. MaRV terminal maneuvering.",
-    "sources": ["DoD Annual China Military Power Report 2023", "CSIS", "IISS"]
+    "sources": [
+      {
+        "label": "DoD Annual China Military Power Report 2023",
+        "url": "https://www.defense.gov/",
+        "year": 2023
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "DF-26",
@@ -455,14 +825,34 @@
     "stages": 2,
     "peak_mach": 12.0,
     "cep_m": 150,
-    "guidance": ["INS", "BeiDou", "Terminal guidance"],
+    "guidance": [
+      "INS",
+      "BeiDou",
+      "Terminal guidance"
+    ],
     "mass_kg": 20000,
     "diameter_m": 1.4,
     "length_m": 14.0,
     "first_test": 2014,
     "operational": true,
     "status_notes": "Dual-capable (conventional/nuclear). Anti-ship and land-attack roles. Nicknamed 'Guam killer.' MaRV terminal phase.",
-    "sources": ["DoD China Military Power Report 2023", "CSIS Missile Defense Project", "IISS 2024"]
+    "sources": [
+      {
+        "label": "DoD China Military Power Report 2023",
+        "url": "https://www.defense.gov/",
+        "year": 2023
+      },
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS 2024",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "DF-27",
@@ -475,13 +865,28 @@
     "stages": 2,
     "peak_mach": 12.0,
     "cep_m": 30,
-    "guidance": ["INS", "BeiDou", "HGV maneuvering"],
+    "guidance": [
+      "INS",
+      "BeiDou",
+      "HGV maneuvering"
+    ],
     "mass_kg": 35000,
     "_uncertain": true,
     "first_test": 2023,
     "operational": false,
     "status_notes": "Reported by DoD in China Military Power Report 2023. Intermediate-range hypersonic glide vehicle. Limited open-source confirmation of specifications.",
-    "sources": ["DoD China Military Power Report 2023", "CSIS 2024"]
+    "sources": [
+      {
+        "label": "DoD China Military Power Report 2023",
+        "url": "https://www.defense.gov/",
+        "year": 2023
+      },
+      {
+        "label": "CSIS 2024",
+        "url": "https://missilethreat.csis.org/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "DF-ZF / WU-14",
@@ -494,12 +899,32 @@
     "stages": 2,
     "peak_mach": 10.0,
     "cep_m": 50,
-    "guidance": ["INS", "BeiDou", "Maneuvering HGV"],
+    "guidance": [
+      "INS",
+      "BeiDou",
+      "Maneuvering HGV"
+    ],
     "_uncertain": true,
     "first_test": 2014,
     "operational": true,
     "status_notes": "HGV tested 7+ times 2014–2016. Now believed operational on DF-17 boost vehicle. First operational hypersonic glide vehicle globally (DoD 2020 assessment).",
-    "sources": ["DoD China Military Power Report 2023", "CSIS", "IISS"]
+    "sources": [
+      {
+        "label": "DoD China Military Power Report 2023",
+        "url": "https://www.defense.gov/",
+        "year": 2023
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "IISS",
+        "url": "https://www.iiss.org/publications/the-military-balance/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Hwasong-18",
@@ -513,12 +938,30 @@
     "peak_mach": 23.0,
     "cep_m": 2000,
     "_uncertain": true,
-    "guidance": ["INS"],
+    "guidance": [
+      "INS"
+    ],
     "mass_kg": 80000,
     "first_test": 2023,
     "operational": false,
     "status_notes": "First North Korean solid-fuel ICBM. Tested April 2023. Faster launch preparation vs liquid variants. Operational deployment timeline uncertain.",
-    "sources": ["NTI", "CSIS Missile Defense Project", "38 North 2023"]
+    "sources": [
+      {
+        "label": "NTI",
+        "url": "https://www.nti.org/countries/",
+        "year": null
+      },
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      },
+      {
+        "label": "38 North 2023",
+        "url": null,
+        "year": 2023
+      }
+    ]
   },
   {
     "name": "Arrow-3",
@@ -533,11 +976,27 @@
     "role": "Exo-atmospheric intercept",
     "max_intercept_alt_km": 150,
     "min_intercept_alt_km": 50,
-    "pk_vs_mrbm": 0.80,
+    "pk_vs_mrbm": 0.8,
     "first_test": 2011,
     "operational": true,
     "status_notes": "Exo-atmospheric hit-to-kill interceptor. Engages targets above atmosphere. Joint Israel-US development. First operational intercept of ballistic missile in space, Oct 2024.",
-    "sources": ["Israel MoD", "US MDA", "CSIS Missile Defense Project 2024"]
+    "sources": [
+      {
+        "label": "Israel MoD",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "US MDA",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "CSIS Missile Defense Project 2024",
+        "url": "https://missilethreat.csis.org/",
+        "year": 2024
+      }
+    ]
   },
   {
     "name": "SM-3 Block IIA",
@@ -554,7 +1013,23 @@
     "first_test": 2015,
     "operational": true,
     "status_notes": "Joint US-Japan development. Deployed on Aegis ships and Aegis Ashore. Designed to engage MRBMs and limited ICBM threats.",
-    "sources": ["US MDA", "Janes Naval Weapons 2024", "CSIS"]
+    "sources": [
+      {
+        "label": "US MDA",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "Janes Naval Weapons 2024",
+        "url": "https://www.janes.com/",
+        "year": 2024
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Patriot PAC-3 MSE",
@@ -571,7 +1046,23 @@
     "first_test": 2015,
     "operational": true,
     "status_notes": "Missile Segment Enhancement. Larger kill vehicle, increased range vs PAC-3. Intercepted Kinzhal in Ukraine (reported May 2023). Widely exported.",
-    "sources": ["US Army PEO Missiles & Space", "Janes Land-Based Air Defence 2024", "CSIS"]
+    "sources": [
+      {
+        "label": "US Army PEO Missiles & Space",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "Janes Land-Based Air Defence 2024",
+        "url": "https://www.janes.com/",
+        "year": 2024
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "Iron Dome (Tamir)",
@@ -586,12 +1077,28 @@
     "role": "Short-range rocket/artillery/mortar defense",
     "max_intercept_alt_km": 10,
     "min_intercept_alt_km": 0.05,
-    "pk_vs_rocket": 0.90,
+    "pk_vs_rocket": 0.9,
     "cost_per_interceptor_usd": 40000,
     "first_test": 2008,
     "operational": true,
     "status_notes": "Highly effective vs short-range rockets and drones. Not designed for ballistic missiles above ~300m/s.",
-    "sources": ["Israeli MoD", "RAND Corporation 2020", "CSIS"]
+    "sources": [
+      {
+        "label": "Israeli MoD",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "RAND Corporation 2020",
+        "url": null,
+        "year": 2020
+      },
+      {
+        "label": "CSIS",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      }
+    ]
   },
   {
     "name": "THAAD",
@@ -611,6 +1118,22 @@
     "first_test": 2006,
     "operational": true,
     "status_notes": "Hit-to-kill (no warhead). 17 successful intercept tests as of 2024. Deployed in South Korea, Guam, UAE, Israel. Limited effectiveness vs hypersonic glide vehicles.",
-    "sources": ["US MDA", "Janes Land-Based Air Defence 2024", "CSIS Missile Defense Project"]
+    "sources": [
+      {
+        "label": "US MDA",
+        "url": null,
+        "year": null
+      },
+      {
+        "label": "Janes Land-Based Air Defence 2024",
+        "url": "https://www.janes.com/",
+        "year": 2024
+      },
+      {
+        "label": "CSIS Missile Defense Project",
+        "url": "https://missilethreat.csis.org/",
+        "year": null
+      }
+    ]
   }
 ]

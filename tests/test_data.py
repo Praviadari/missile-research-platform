@@ -83,6 +83,20 @@ class TestMissilesJson:
         for m in missiles:
             assert isinstance(m["sources"], list), f"Sources not a list in {m['name']}"
             assert len(m["sources"]) > 0, f"Empty sources in {m['name']}"
+            for s in m["sources"]:
+                assert isinstance(s, dict), f"Source not object in {m['name']}: {s}"
+                assert s.get("label"), f"Source missing label in {m['name']}"
+
+    def test_sources_often_have_url(self, missiles):
+        with_url = 0
+        total = 0
+        for m in missiles:
+            for s in m["sources"]:
+                total += 1
+                if s.get("url"):
+                    with_url += 1
+        assert total > 0
+        assert with_url / total >= 0.4, "Expected most enriched sources to resolve a URL"
 
     def test_no_duplicate_names(self, missiles):
         names = [m["name"] for m in missiles]
@@ -183,18 +197,13 @@ class TestTreatiesJson:
         assert len(treaties) == 8
 
     def test_required_fields(self, treaties):
-        required = ["id", "name", "full_name", "status", "summary", "category"]
+        required = [
+            "id", "name", "full_name", "status", "summary", "category",
+            "origin_year", "member_count",
+        ]
         for t in treaties:
             for field in required:
                 assert field in t, f"Missing '{field}' in treaty: {t.get('name', '?')}"
-
-    def test_membership_field_present(self, treaties):
-        """Treaties/regimes use parties, parties_original, members, or subscribing_states."""
-        membership_keys = ("parties", "parties_original", "members", "subscribing_states")
-        for t in treaties:
-            assert any(k in t for k in membership_keys), (
-                f"No membership field in {t['name']}"
-            )
 
     def test_no_duplicate_names(self, treaties):
         names = [t["name"] for t in treaties]
@@ -202,12 +211,13 @@ class TestTreatiesJson:
 
     def test_origin_year_plausible(self, treaties):
         for t in treaties:
-            raw = t.get("signed", t.get("established", t.get("entered_into_force")))
-            if raw is None:
-                continue
-            year = int(str(raw)[:4]) if str(raw)[:4].isdigit() else None
-            if year is not None:
-                assert 1945 <= year <= 2030, f"Implausible year {year} in {t['name']}"
+            year = t.get("origin_year")
+            assert isinstance(year, int), f"origin_year missing in {t['name']}"
+            assert 1945 <= year <= 2030, f"Implausible year {year} in {t['name']}"
+
+    def test_member_count_positive(self, treaties):
+        for t in treaties:
+            assert isinstance(t["member_count"], int) and t["member_count"] > 0
 
 
 class TestResourcesJson:

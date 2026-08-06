@@ -175,7 +175,16 @@ def _render_cards(missiles):
 
                 with st.expander(f"ℹ️ Notes — {m['name']}", expanded=False):
                     st.markdown(m.get("status_notes", "No additional notes."))
-                    st.markdown("**Sources:** " + "; ".join(m.get("sources", ["—"])))
+                    src_bits = []
+                    for s in m.get("sources", []):
+                        if isinstance(s, dict):
+                            label = s.get("label", "—")
+                            year = f" ({s['year']})" if s.get("year") else ""
+                            url = s.get("url")
+                            src_bits.append(f"[{label}{year}]({url})" if url else f"{label}{year}")
+                        else:
+                            src_bits.append(str(s))
+                    st.markdown("**Sources:** " + ("; ".join(src_bits) if src_bits else "—"))
 
         st.markdown("<br>", unsafe_allow_html=True)
 

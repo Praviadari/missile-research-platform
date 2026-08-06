@@ -19,6 +19,10 @@ from ui.theme import card, badge, section_header
 def render():
     st.title("⚙️ GrowthOps")
     st.caption("Conversion analytics and growth operations. Admin only.")
+    st.info(
+        "DEMO MODE: funnel and engagement charts use illustrative numbers unless "
+        "PostHog is configured. Event map below is the wiring contract."
+    )
 
     tab_funnel, tab_engagement, tab_abtest = st.tabs([
         "📈 Conversion Funnel", "📊 Page Engagement", "🧪 Experiment Control"

@@ -150,7 +150,13 @@ def render():
                     st.markdown(f"- In force: **{treaty['entered_into_force']}**")
                 if treaty.get("terminated"):
                     st.markdown(f"- Terminated: **{treaty['terminated']}**")
-                if treaty.get("parties"):
+                if treaty.get("member_count") is not None:
+                    st.markdown(f"- Members / parties: **{treaty['member_count']}**")
+                elif treaty.get("members"):
+                    members = treaty["members"]
+                    label = ", ".join(members) if isinstance(members, list) else str(members)
+                    st.markdown(f"- Members: **{label}**")
+                elif treaty.get("parties"):
                     st.markdown(f"- Parties: **{treaty['parties']}**")
                 if treaty.get("members"):
                     st.markdown(f"- Members: **{treaty['members']}**")

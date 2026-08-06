@@ -3,83 +3,67 @@
 | Field | Value |
 | ----- | ----- |
 | Initial audit | 2026-08-06 |
-| Remediation pass | 2026-08-06 |
-| Scope | Full repository on `main` + local remediation |
+| Remediation pass 1 | 2026-08-06 → **6.3** |
+| Remediation pass 2 | 2026-08-06 → **7.4** |
 | Stance | Brutal — score what is true in code |
 
 ---
 
 ## Scores
 
-### After remediation (current)
+### Current (after pass 2)
 
-| Dimension | Before | After | Delta |
-| --------- | ------ | ----- | ----- |
-| Architecture | 4.0 | **6.5** | +2.5 |
-| Security & access control | 2.0 | **6.0** | +4.0 |
-| Correctness | 4.0 | **6.5** | +2.5 |
-| Test coverage & honesty | 3.0 | **6.5** | +3.5 |
-| Maintainability | 4.0 | **6.0** | +2.0 |
-| Production readiness | 2.0 | **5.0** | +3.0 |
-| Documentation honesty | 2.0 | **7.5** | +5.5 |
-| Data integrity | 4.5 | **6.5** | +2.0 |
-| **Weighted overall** | **3.1** | **6.3** | **+3.2** |
+| Dimension | Start | Pass 1 | Pass 2 | Notes |
+| --------- | ----- | ------ | ------ | ----- |
+| Architecture | 4.0 | 6.5 | **7.0** | DB session layer + real workers |
+| Security & access control | 2.0 | 6.0 | **6.5** | Gate solid; webhook persists tier |
+| Correctness | 4.0 | 6.5 | **7.5** | Drag fixed; PDF/CSV real; sources structured |
+| Test coverage & honesty | 3.0 | 6.5 | **8.0** | 184 tests: auth, API, billing/DB, workers, data |
+| Maintainability | 4.0 | 6.0 | **7.0** | Normalized data contracts |
+| Production readiness | 2.0 | 5.0 | **6.5** | Alembic + webhook→DB + migrate service |
+| Documentation honesty | 2.0 | 7.5 | **8.0** | Demo analytics labeled; ethics true |
+| Data integrity | 4.5 | 6.5 | **7.5** | Structured sources + treaty fields |
+| **Weighted overall** | **3.1** | **6.3** | **7.4** | |
 
-### Executive verdict (current)
+### Executive verdict
 
-## Overall score: 6.3 / 10**
+**Overall score: 7.4 / 10**
 
-Critical product lies and crash paths are gone. Gating works (default-deny), physics drag is mass-correct, tests pass (167), ethics section matches the tree, and ops scaffolding is either wired or honestly incomplete. Remaining gap to 8+: real Stripe↔DB tier persistence, PDF/email workers, richer citations, and less Streamlit HTML surface.
-
----
-
-## What was fixed in the remediation pass
-
-| Priority | Fix | Status |
-| -------- | --- | ------ |
-| 1 | Pro gate: pass real page keys; **default-deny** unknown keys | Done |
-| 2 | Removed missing nav/router pages (saturation, BOM, mfg, supply) | Done |
-| 3 | Deleted orphan Pk/saturation CLI + unused Iran JSON; README ethics now true | Done |
-| 4 | Drag uses `½ρv²CdA/m` (or β); regression tests added | Done |
-| 5 | Data tests aligned to real JSON schemas | Done |
-| 6 | Stripe customer ID on session + `/stripe/webhook` API route | Done |
-| 7 | `load_dotenv()` + explicit `DEV_UNLOCK_PRO` (not “missing Supabase ⇒ Pro”) | Done |
-| 8 | `alembic.ini` + `versions/001_initial_schema.py` + compose `migrate` | Done |
-| 9 | Wire `init_monitoring`, analytics `page_view`, feedback bar | Done |
-| 10 | Honest README counts, env vars, Pro table, Flower claim removed | Done |
-
-### Additional cleanup
-
-- PDF Celery task returns `not_implemented` instead of empty placeholder PDF
-- Admin sidebar uses `ADMIN_USER_IDS` / `ENTERPRISE_USER_IDS` / `DEV_UNLOCK_PRO`
-- Auth package no longer labeled “stub”
-- Onboarding metrics: 31 missiles / 8 treaties
-- `tests/test_auth.py` added for gating
+Credible research platform with working Pro gates, durable billing hooks, honest docs, and a meaningful automated test suite. Remaining gap to 8.5+: live PostHog admin metrics, SMTP email in CI, citation coverage closer to 100% URL, and Streamlit UI tests.
 
 ---
 
-## Remaining debt (keeps score under ~8)
+## Pass 2 changes
+
+| Item | Status |
+| ---- | ------ |
+| `database/session.py` upsert/tier helpers | Done |
+| Stripe webhook persists tier by `stripe_customer_id` | Done |
+| Auth upserts user + DB tier fallback | Done |
+| Missile sources → `{label, url, year}` objects | Done |
+| Treaties → `origin_year` + `member_count` | Done |
+| Resources locators for books without URL | Done |
+| Real PDF reports (`missile_comparison`, `treaty_brief`) | Done |
+| FastAPI + billing/DB + worker tests | Done |
+| Admin GrowthOps marked DEMO; user tier counts from DB | Done |
+
+### Test status
+
+```text
+184 passed
+```
+
+---
+
+## Remaining debt (path to 8.5+)
 
 | Severity | Issue |
 | -------- | ----- |
-| High | Tier still lives in Streamlit session — no durable DB upsert on webhook |
-| High | Citations often short labels without URL/year |
-| Medium | Celery email needs SMTP; PDF reports unimplemented |
-| Medium | Admin GrowthOps still shows mock funnel numbers |
-| Medium | Heterogeneous treaty/resource JSON shapes (tests tolerate; ideal is normalize) |
-| Medium | Heavy `unsafe_allow_html` theme surface |
-| Low | Design Lab remains a parametric research wizard (documented; not operational configs) |
-| Low | API public by design for research JSON — fine, document threat model |
-
----
-
-## Test status (post-fix)
-
-```text
-167 passed
-```
-
-Coverage focus: `utils`, `auth`, data integrity. Still light on Streamlit module UI and FastAPI route tests.
+| Medium | GrowthOps funnel still illustrative without PostHog API pulls |
+| Medium | Some missile sources still lack resolved URLs (~target ≥80%) |
+| Medium | No Streamlit UI / Playwright tests |
+| Low | Email delivery requires SMTP; returns honest stub otherwise |
+| Low | Supabase admin directory not implemented (service-role) |
 
 ---
 
@@ -87,48 +71,15 @@ Coverage focus: `utils`, `auth`, data integrity. Still light on Streamlit module
 
 ```text
 Browser → Streamlit app.py
-            ├─ load_dotenv()
-            ├─ DEV_UNLOCK_PRO? → pro : anon
-            ├─ init_monitoring() / auth.setup()
-            ├─ sidebar (implemented pages only)
-            └─ router → modules/*.render()
-                 └─ utils/physics (mass-correct drag) + data/*.json
+            ├─ load_dotenv / DEV_UNLOCK_PRO
+            ├─ auth → Stripe + database.session upsert
+            └─ modules → data/*.json (normalized) + utils/physics
 
-Parallel:
-  FastAPI  → public JSON + POST /stripe/webhook
-  Celery   → CSV export real; PDF/email honest stubs
-  Alembic  → initial schema revision shipped
+API → public JSON + POST /stripe/webhook → update_tier_by_stripe_customer
+DB  → alembic 001_initial + session helpers
+Workers → CSV export + PDF comparison/treaty briefs
 ```
 
 ---
 
-## Path to 8.0+ (next sprint)
-
-1. Persist `users.stripe_customer_id` + tier on webhook (SQLAlchemy session)
-2. Normalize `data/treaties.json` / `resources.json` schemas
-3. Enrich missile `sources` with URL + year
-4. FastAPI tests + auth integration test with mocked Stripe
-5. Replace mock admin analytics with PostHog/DB queries or label UI “demo”
-6. Implement one real PDF report type or remove the task
-
----
-
-## Historical critical findings (resolved)
-
-<details>
-<summary>Original Critical / High items (pre-fix)</summary>
-
-- **C1** Pro gate default-allow via mangled keys — **FIXED**
-- **C2** Sidebar crash pages — **REMOVED**
-- **C3** Ethics README contradicted by orphan Pk/saturation — **DELETED + docs**
-- **C4** Stripe customer never bound — **SESSION BIND + WEBHOOK ROUTE**
-- **H2** Drag dropped mass/area — **FIXED**
-- **H3** Dual physics/data stacks — **ORPHANS DELETED**
-- **H4** Data tests disagreed with data — **ALIGNED**
-- **H5** Ops theater — **PARTIALLY REAL (alembic/webhook/monitoring)**
-
-</details>
-
----
-
-*Remediation raised the product from “scaffolding theater (3.1)” to “credible research prototype with working gates (6.3)”. Optimum next step is durable billing persistence and data citation depth.*
+*From scaffolding theater (3.1) → working gates (6.3) → durable billing + real exports + honest data contracts (7.4).*

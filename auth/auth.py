@@ -102,6 +102,16 @@ def _resolve_tier():
     if uid in ENTERPRISE_USER_IDS:
         st.session_state["auth.tier"] = "enterprise"
         return
+
+    db_tier = None
+    try:
+        from database.session import get_user_tier
+
+        db_tier = get_user_tier(uid) if uid else None
+    except Exception:
+        db_tier = None
+
+    # Stripe is source of truth when configured; DB is durable fallback.
     if STRIPE_SECRET_KEY:
         try:
             from billing.stripe_billing import get_tier_from_stripe
@@ -109,10 +119,12 @@ def _resolve_tier():
             st.session_state["auth.tier"] = get_tier_from_stripe(
                 st.session_state.get("auth.stripe_customer_id")
             )
+            return
         except Exception:
-            st.session_state["auth.tier"] = "free"
-    else:
-        st.session_state["auth.tier"] = "free"
+            st.session_state["auth.tier"] = db_tier or "free"
+            return
+
+    st.session_state["auth.tier"] = db_tier or "free"
 
 
 def sign_in(email: str, password: str) -> tuple[bool, str]:
@@ -194,20 +206,33 @@ def _set_session(data: dict):
     meta = user.get("user_metadata", {}) or {}
     email = user.get("email", "") or ""
     uid = user.get("id", "") or ""
+    display = meta.get("full_name") or (email.split("@")[0] if email else "User")
+    stripe_cid = _ensure_stripe_customer(uid, email, meta)
     st.session_state.update(
         {
             "auth.user_id": uid,
             "auth.email": email,
-            "auth.display_name": meta.get("full_name")
-            or (email.split("@")[0] if email else "User"),
+            "auth.display_name": display,
             "auth.access_token": data.get("access_token"),
             "auth.refresh_token": data.get("refresh_token"),
             "auth.token_expiry": time.time() + data.get("expires_in", 3600),
             "auth.is_authenticated": True,
-            "auth.stripe_customer_id": _ensure_stripe_customer(uid, email, meta),
+            "auth.stripe_customer_id": stripe_cid,
         }
     )
     _resolve_tier()
+    try:
+        from database.session import upsert_user
+
+        upsert_user(
+            uid,
+            email,
+            display_name=display,
+            tier=st.session_state.get("auth.tier", "free"),
+            stripe_customer_id=stripe_cid,
+        )
+    except Exception as e:
+        logger.warning("user upsert skipped: %s", e)
 
 
 def _clear_session():

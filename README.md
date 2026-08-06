@@ -114,7 +114,13 @@ docker-compose run --rm migrate   # alembic upgrade head
 ### Run Tests
 
 ```bash
-pytest tests/ -v --cov=utils --cov=auth --cov-report=term-missing
+pytest tests/ -v --cov=utils --cov=auth --cov=billing --cov=database --cov-report=term-missing
+```
+
+Database migrations (Docker or local Postgres):
+
+```bash
+alembic upgrade head
 ```
 
 ---
